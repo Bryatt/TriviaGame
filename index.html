@@ -1,0 +1,131 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TriviaGame</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="assets/javascript/app.js"></script>
+</head>
+<body>
+    <div class="giveStyle">
+    <div id="page_content">
+    <input type="button" id="start_button" value="Start" />
+    <span id="count_span"></span>
+    <div id="test_content">
+    <li>1. Please choose A</li>
+    <li><label><input name="test_one" type="radio" value="a" />A </label>
+    <label><input name="test_one" type="radio" value="b" />B </label>
+    <label><input name="test_one" type="radio" value="c" />C </label> </li>
+    
+    <li>2. Please choose B</li>
+    <li><label><input name="test_two" type="radio" value="a" />A </label>
+    <label><input name="test_two" type="radio" value="b" />B </label>
+    <label><input name="test_two" type="radio" value="c" />C </label></li>
+    
+    <li>3. Please choose C</li>
+    <li><label><input name="test_three" type="radio" value="a" />A </label>
+    <label><input name="test_three" type="radio" value="b" />B </label>
+    <label><input name="test_three" type="radio" value="c" />C </label></li>
+    <input type="button" id="alldone" value="AllDone" />
+    </div>
+    <div id="newResult">
+    <div id="result">
+        <li><p style="color:green; font-size:20pt;">All done!</p></li>
+    <span id="correct_span"></span></br>
+    <span id="incorrect_span"></span></br>
+    <span id="unanswered_span"></span></br>
+    </div></div>
+    </div></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    function timer(intDiff){
+        window.setInterval(function(){
+        intDiff--;
+        }, 1000);
+    }
+
+        var countdown=10;
+    
+    function settime(){
+    if (countdown == 0) {
+        $("#count_span").text("Time Remaining: " + countdown +" Secends");
+        $("#test_content").hide();
+        //right number
+        var right_number=0;
+        //error number
+        var error_number=0;
+        //without did number
+        var without_number=0;
+        var test_one=$('input:radio[name="test_one"]:checked').val();
+        var test_two=$('input:radio[name="test_two"]:checked').val();
+        var test_three=$('input:radio[name="test_three"]:checked').val();
+
+        //first right answer is a
+        if(test_one=='a'){
+            right_number++;
+            }
+            else if(test_one === undefined){
+                    without_number++;
+                    }
+                    else{
+                    error_number++;
+                    }
+    
+        //second right answer is b
+        if(test_two=='b'){
+            right_number++;
+            }
+            else if(test_two=== undefined){
+                    without_number++;
+                }
+                else{
+                    error_number++;
+                    }
+    
+        //third right answer is c
+        if(test_three=='c'){
+            right_number++;
+            }
+            else if(test_three=== undefined){
+                    without_number++;
+                    }
+                    else{
+                        error_number++;
+                        }
+            $("#count_span").hide();
+            $("#result").show();
+            $("#correct_span").text("Correct Answers: " + right_number);
+            $("#incorrect_span").text("Incorrect Answers: " + error_number);
+            $("#unanswered_span").text("Unanswered: " + without_number);
+    
+    
+    } else {
+            $("#count_span").text("Time Remaining: " + countdown +" Secends");
+            countdown--; }}
+    
+    $(document).ready(function(){
+        $("#test_content").hide();
+        $("#result").hide();
+        $("#start_button").click(function(){
+        $("#start_button").hide();
+    
+              var countdown=10;
+                 var myReapter = setInterval(settime,1000);
+    
+            $("#test_content").show()
+            });
+        });
+
+        $("#alldone").on("click", function(){
+            $("#count_span").hide();
+            $("#result").show();
+            $("#correct_span").text("Correct Answers: " + right_number);
+            $("#incorrect_span").text("Incorrect Answers: " + error_number);
+            $("#unanswered_span").text("Unanswered: " + without_number);
+        })
+    </script>
+    </body>
+    
+</html>
